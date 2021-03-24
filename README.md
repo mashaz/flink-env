@@ -34,3 +34,8 @@ docker-compose -f flink-sql-client-docker/docker-compose.yml up -d
 docker-compose exec sql-client bash -c "./sql-client.sh"
 ```
 
+start mysql
+
+```
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 --network flink -d mysql
+```
