@@ -19,8 +19,18 @@ docker network create -d bridge flink
 start flink
 
 ```
-docker-compose flink-docker/docker-compose.yml up -d
+docker-compose -f flink-docker/docker-compose.yml up -d
 ```
 
+启动flink-sql-client（如果需要）
 
+```
+docker-compose -f flink-sql-client-docker/docker-compose.yml up -d
+```
+
+进入sql-client shell
+
+```
+docker-compose exec sql-client bash -c "./sql-client.sh"
+```
 

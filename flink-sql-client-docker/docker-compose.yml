@@ -1,0 +1,17 @@
+version: '2'
+services:
+  sql-client:
+    image: jark/demo-sql-client:0.2
+    environment:
+      FLINK_JOBMANAGER_HOST: jobmanager
+      ZOOKEEPER_CONNECT: zookeeper
+      KAFKA_BOOTSTRAP: kafka
+      MYSQL_HOST: mysql
+      ES_HOST: elasticsearch
+      TZ: Asia/Shanghai
+    networks:
+      - flink
+networks:
+  flink:
+    external:
+      name: flink
