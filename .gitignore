@@ -3,3 +3,6 @@
 dependency-reduced-pom.xml
 WordCount.iml
 target/
+
+
+.DS_Store

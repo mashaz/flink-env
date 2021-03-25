@@ -9,8 +9,6 @@ create database flink_sink default character set utf8mb4 collate utf8mb4_unicode
 2. create table
 
 ```
-use flink_sink;
-
 DROP TABLE IF EXISTS `test`;
 CREATE TABLE `test` (
   `word` text CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
@@ -24,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment, createTypeInformation}
 
 object MysqlSinkDemo {
-  private val mysql_host = "jdbc:mysql://127.0.0.1:3306/flink_sink"
+  private val mysql_host = "jdbc:mysql://mysql:3306/flink_sink"
   private val mysql_user = "root"
   private val mysql_pass = "123456"
   def main(args: Array[String]): Unit = {
@@ -41,7 +39,6 @@ object MysqlSinkDemo {
 
     //Create streams for names and ages by mapping the inputs to the corresponding objects
     val text = env.socketTextStream(hostName, port)
-    // text.addSink(sink)
 
     val counts: DataStream[(String, Int)] = text
       // split up the lines in pairs (2-tuples) containing: (word,1)
@@ -52,11 +49,7 @@ object MysqlSinkDemo {
       .keyBy(_._1)
       .sum(1)
 
-
     counts.map(data => WordCountClass(data._1, data._2).toString()).addSink(sink)
-    // counts.print()
-
-    // val myOutput: Iterator[(String, Int)] = DataStreamUtils.collect(counts.javaStream).asScala
 
     env.execute()
   }

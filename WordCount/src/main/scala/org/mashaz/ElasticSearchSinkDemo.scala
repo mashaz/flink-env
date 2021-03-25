@@ -11,7 +11,7 @@ import org.elasticsearch.client.Requests
 object ElasticSearchSinkDemo {
   def main(args: Array[String]): Unit = {
     val httpHosts = new java.util.ArrayList[HttpHost]
-    httpHosts.add(new HttpHost("127.0.0.1", 9200, "http"))
+    httpHosts.add(new HttpHost("10.23.32.50", 9200, "http"))
 
     val esSinkBuilder = new ElasticsearchSink.Builder[String](
       httpHosts,
